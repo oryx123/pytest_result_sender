@@ -15,13 +15,50 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 
+
 [tool.pdm]
 distribution = true
-
-[project.entry-points.pytestll]
-result_log = "pytest_result_sender.plugin"
 
 [tool.pdm.build]
 package-dir = "src"
 
 
+[project.entry-points.pytestll]
+result_log = "pytest_result_sender.plugin"
+
+
+[dependency-groups]
+dev = [
+    "black>=25.1.0",
+    "isort>=6.0.1",
+    "flake8>=7.1.2",
+]
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.black]
+exclude = '''
+/(
+    \.git
+   |\.hg
+   |\.mypy_cache
+   |\.tox
+   |\.venv
+   |_build
+   |buck-out
+   |build
+   |dist
+)/
+'''
+
+
+[tool.pdm.scripts]
+check = { composite = [ 
+    "isort .",
+    "black .",
+    "flake8 .",
+] }
+
+test = "pytest"
