@@ -8,6 +8,11 @@ data = {
 }
 
 
+def pytest_addoption(parser):
+    parser.addini("send_when", help="send result when")
+    parser.addini("send_api", help="send where")
+
+
 def pytest_runtest_logreport(report):
     print(report)
     if report.when == "call":
@@ -17,12 +22,14 @@ def pytest_runtest_logreport(report):
 def pytest_collection_finish(session: pytest.Session):
     # 用例加载完成后执行，包含了所有用例
     data["total"] = len(session.items)
-    print(session.items)
+    print(data["total"])
 
 
-def pytest_configure():
+def pytest_configure(config: pytest.Config):
     # 配置加载完毕，测试用例之前
     data["start_time"] = datetime.now()
+    print(config.getini("send_when"))
+    print(config.getini("send_api"))
 
 
 def pytest_unconfigure():

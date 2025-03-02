@@ -23,7 +23,7 @@ distribution = true
 package-dir = "src"
 
 
-[project.entry-points.pytestll]
+[project.entry-points.pytest11]
 result_log = "pytest_result_sender.plugin"
 
 
