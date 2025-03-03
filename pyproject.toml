@@ -1,6 +1,6 @@
 [project]
 name = "pytest_result_sender"
-version = "0.1.0"
+version = "0.1.1"
 description = "Default template for PDM package"
 authors = [
     {name = "oryx123", email = "1073889494@qq.com"},
